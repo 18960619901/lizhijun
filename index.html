@@ -22,10 +22,16 @@
 	</style>
 </head>
 <body>
-	<!--===音乐：原谅——刘瑞琦======================================-->
+	<!--===音乐：原谅——刘瑞琦====================
 	<audio autoplay>
 			<source src="forgive.mp3"/>
-	</audio>  
+	</audio>  ==================-->
+	
+	
+	<div id="play_btn">
+        	<button type="button"></button>
+        	<audio src="forgive.mp3" loop preload></audio>
+   	 </div>
 	
 	<!--==============================================================-->
 	<div id="main">
@@ -36,14 +42,12 @@
             <div id="text">
 		        <div id="code">
 		      		<font color="#FF0000">  	
-		      			<span class="say">hello,芷君同学</span><br>
-						<span class="say"></span><br>
+		      				<span class="say">hello,芷君同学：</span><br>
 						<span class="say">虽然，我们认识的时间很短暂</span><br>
-						<span class="say"></span><br>
-			        	<span class="say">我对你的生活也不了解</span><br>
+			        		<span class="say">我对你也不不算了解</span><br>
 						<span class="say">甚至没有见过你本人</span><br>
 						<span class="say">但是，你幽默、风趣、积极、活泼的性格还是深深的吸引了我</span><br>
-						<span class="say">无论结果如何，我都希望你能一直开心，未来无惧，前程可期。</span><br>
+						<span class="say">无论将来如何，我都希望你能一直开心，未来无惧，前程可期，加油！</span><br>
 						<span class="say"></span><br>
                         <span class="say"><span class="space"></span> -- 致我心中的宝藏女孩--</span>
 			  		</font>
@@ -219,18 +223,61 @@
 	        runAsync().start();
 	    })();
 	    
+	    
+	     function autoPlay() {
+        /* 自动播放音乐效果，解决浏览器或者APP自动播放问题 */
+        function musicInBrowserHandler() {
+            audioToggle(true);
+            document.body.removeEventListener('touchstart', musicInBrowserHandler);
+        }
+        document.body.addEventListener('touchstart', musicInBrowserHandler);
+
+        /* 自动播放音乐效果，解决微信自动播放问题 */
+        function musicInWeixinHandler() {
+            audioToggle(true);
+            document.addEventListener('WeixinJSBridgeReady', function() {
+                audioToggle(true);
+            }, false);
+            document.addEventListener('YixinJSBridgeReady', function() {
+                audioToggle(true);
+            }, false);
+            document.removeEventListener('DOMContentLoaded', musicInWeixinHandler);
+        }
+        document.addEventListener('DOMContentLoaded', musicInWeixinHandler);
+    }
+    autoPlay();
+
+    // ====================================================
+
+    function audioToggle(isPlay) {
+        var playBtn = document.getElementById('play_btn');
+        var audio = playBtn.getElementsByTagName('audio')[0];
+
+        if (typeof(isPlay) == 'undefined') {
+            isPlay = !!audio.paused;
+        }
+
+        var space = String.fromCharCode(32); // 空格
+        var playBtnClass = space + (playBtn.getAttribute('class') || (isPlay ? 'play' : 'pause')) + space;
+        if (isPlay) {
+            playBtnClass = playBtnClass.replace(space + 'pause' + space, space + 'play' + space);
+            audio.play();
+        } else {
+            playBtnClass = playBtnClass.replace(space + 'play' + space, space + 'pause' + space);
+            audio.pause();
+        }
+        playBtn.className = playBtnClass.replace(/(^\s*)|(\s*$)/g, '');
+    }
+
+    document.getElementById('play_btn').onclick = function() {
+        audioToggle();
+    }
+	    
     </script>
     
     
     
     
-  
-	
-	
-
-	
-	
-	
 	
 	
 </body>
