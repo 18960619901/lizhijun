@@ -98,7 +98,7 @@ wx.config({
     	function Orderprocessing(){
 	        var vid = document.getElementById("audio");//获取音频对象
 	        var start = 0;//定义循环的变量
-	        var times=3;//定于循环的次数
+	        var times=30;//定于循环的次数
 	        autoPlayAudio(vid);
 	        if(vid.paused) {
 	            vid.play();// 这个就是播放
@@ -109,7 +109,7 @@ wx.config({
 	                vid.play();// 这个就是播放
 	            }
 	            start++;//循环
-	            false;//也就是当循环的变量等于次数的时候，就会终止循环并且关掉音频
+	            start == times && vid.pause();//也就是当循环的变量等于次数的时候，就会终止循环并且关掉音频
 	        });
 	    }
 
