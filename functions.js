@@ -38,6 +38,7 @@ $(window).resize(function() {
 })(jQuery);
 
 function timeElapse(date){
+	debugger;
 	var current = new Date();
 	var seconds = (Date.parse(current) - Date.parse(date)) / 1000;
 	var days = Math.floor(seconds / (3600 * 24));
