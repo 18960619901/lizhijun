@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <title>献给芷君同学的七夕礼物</title>
     <link type="text/css" rel="stylesheet" href="default.css">
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+   <script src=”http://libs.baidu.com/jquery/2.1.1/jquery.min.js”></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript" src="jscex.min.js"></script>
     <script type="text/javascript" src="jscex-parser.js"></script>
@@ -26,7 +28,11 @@
 
 
 <div id="main">
-<audio id="audio2" src="forgive.mp3" preload="" autoplay="autoplay" loop="loop" ></audio>
+
+<audio hidden="hidden" id="audio">
+        <source src="forgive.mp3" type="audio/mp3">
+        <embed height="50px" width="100px" src="forgive.mp3">
+    </audio>
 
 
     <div id="error">
@@ -64,18 +70,47 @@
 <!--==========================================================-->
 <script>
 
-	 function audioAutoPlay(id) {
-            var audio = document.getElementById(id);
-            audio.play();
-            document.addEventListener(
-                "WeixinJSBridgeReady",
-                function() {
-                    audio.play();
-                },
-                false
-            );
-        }
-        
+	wx.config({
+	        debug: false,
+	        appId: 'wxcee5eba3aba35e35',
+	        timestamp: 1559524606,
+	        nonceStr: 'fd6e1bfe6ead430db24a9bba4afbbc5f',
+	        signature: '7f3c14f2817f58321e7cce1ecc7c682bc4ad95c2',
+	        jsApiList: [
+	            'checkJsApi',
+	            'getLocation'
+	        ]
+	    });
+	    // setTimeout("getLocation()","3000");
+	    wx.ready(function(){
+	    	
+	    });
+    	Orderprocessing();
+    	function autoPlayAudio() {
+	        wx.ready(function() {
+	            // document.getElementById('audio').play();
+	            var vid = document.getElementById("audio");//获取音频对象
+	            vid.play();
+	        });
+	    }
+    	function Orderprocessing(){
+	        var vid = document.getElementById("audio");//获取音频对象
+	        var start = 0;//定义循环的变量
+	        var times=3;//定于循环的次数
+	        autoPlayAudio(vid);
+	        if(vid.paused) {
+	            vid.play();// 这个就是播放
+	        }
+	        vid.addEventListener("ended",function() {
+	            autoPlayAudio(vid);
+	            if(vid.paused)                     {
+	                vid.play();// 这个就是播放
+	            }
+	            start++;//循环
+	            start == times && vid.pause();//也就是当循环的变量等于次数的时候，就会终止循环并且关掉音频
+	        });
+	    }
+
 
 
     (function () {
