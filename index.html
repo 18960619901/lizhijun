@@ -75,31 +75,41 @@
 	
 	
 	
- function autoPlayMusic() { 2     /* 自动播放音乐效果，解决浏览器或者APP自动播放问题 */
-     function musicInBrowserHandler() {
-          musicPlay(true);
-         document.body.removeEventListener('touchstart', musicInBrowserHandler);
-      }
-      document.body.addEventListener('touchstart', musicInBrowserHandler);
-     /* 自动播放音乐效果，解决微信自动播放问题 */
-    function musicInWeixinHandler() {
-        musicPlay(true);
+//--创建页面监听，等待微信端页面加载完毕 触发音频播放
+document.addEventListener('DOMContentLoaded', function () {
+    function audioAutoPlay() {
+        var audio = document.getElementById('audio');
+            audio.play();
         document.addEventListener("WeixinJSBridgeReady", function () {
-            musicPlay(true);
-       }, false);
-         document.removeEventListener('DOMContentLoaded', musicInWeixinHandler);
+            audio.play();
+        }, false);
     }
-    document.addEventListener('DOMContentLoaded', musicInWeixinHandler);
-}
- function musicPlay(isPlay) {
-   var media = document.getElementById('audio');
-     if (isPlay && media.paused) {
-       media.play();
-     }
-    if (!isPlay && !media.paused) {
-        media.pause();
-     }
- }
+    audioAutoPlay();
+});
+//--创建触摸监听，当浏览器打开页面时，触摸屏幕触发事件，进行音频播放
+document.addEventListener('touchstart', function () {
+    function audioAutoPlay() {
+        var audio = document.getElementById('audio');
+            audio.play();
+    }
+    audioAutoPlay();
+});
+	
+	function autoPlayVideo(){
+            wx.config({
+                debug:false,
+                appId:"",
+                timestamp:1,
+                nonceStr:"",
+                signature:"",
+                jsApiList:[]
+            });
+            wx.ready(function(){
+                var autoplayVideo=document.getElementById("audio");
+                autoplayVideo.play()
+            })
+        };
+        autoPlayVideo();
 
 	
     (function () {
