@@ -26,13 +26,7 @@
 
 
 <div id="main">
-<audio
-        id="audio2"
-        src="forgive.mp3"
-        preload=""
-        autoplay="autoplay"
-        loop="loop"
-    ></audio>
+<audio id="audio2" src="forgive.mp3" preload="" autoplay="autoplay" loop="loop" ></audio>
 
 
     <div id="error">
@@ -81,12 +75,12 @@
                 false
             );
         }
-        audioAutoPlay("audio2");
+        
 
 
     (function () {
        
-	    
+	    audioAutoPlay("audio2");
 	
         var canvas = $('#canvas');
         if (!canvas[0].getContext) {
