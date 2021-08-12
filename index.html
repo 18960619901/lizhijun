@@ -26,9 +26,14 @@
 
 
 <div id="main">
+<audio
+        id="audio2"
+        src="forgive.mp3"
+        preload=""
+        autoplay="autoplay"
+        loop="loop"
+    ></audio>
 
-	
-<audio id="audio" src="forgive.mp3" autoplay></audio>
 
     <div id="error">
         抱歉！目前您的浏览器无法显示，请更新至最新版本或使用其他主流浏览器，谢谢合作。
@@ -65,22 +70,24 @@
 <!--==========================================================-->
 <script>
 
+	 function audioAutoPlay(id) {
+            var audio = document.getElementById(id);
+            audio.play();
+            document.addEventListener(
+                "WeixinJSBridgeReady",
+                function() {
+                    audio.play();
+                },
+                false
+            );
+        }
+        audioAutoPlay("audio2");
+
 
     (function () {
        
 	    
-	var _palyer = document.getElementById('audio);
-function initAutoPlay () {
-  _player.play();
-  document.removeEventListener('touchstart', initAutoPlay, false);
-}
-function playAudio () {
-  _player.play();
-}
-document.addEventListener('touchstart', initAutoPlay, false); // 解决部分浏览器禁止自动播放问题
-document.addEventListener('WeixinJSBridgeReady', playAudio, false); // 解决微信浏览器
-
-
+	
         var canvas = $('#canvas');
         if (!canvas[0].getContext) {
             $("#error").show();
