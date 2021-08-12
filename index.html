@@ -44,7 +44,7 @@
     <div id="wrap">
         <div id="text">
             <div id="code">
-                <font color="#FF0000">
+                <font color="#33CC00">
                     <span class="say">hello,芷君同学：</span><br>
                     <span class="say">虽然，我们认识的时间很短暂</span><br>
                     <span class="say">我对你也不算了解</span><br>
@@ -59,8 +59,8 @@
         </div>
         <div id="clock-box">
             <span class="STYLE1"></span>
-            <font color="#33CC00">纪念我们认识</font>
-            <!--<span class="STYLE1">已经是……</span>-->
+            <font color="#33CC00">我们认识的时间，</font>
+            <span class="STYLE1">已经是……</span>
             <div id="clock"></div>
         </div>
         <canvas id="canvas" width="1100"></canvas>
@@ -73,11 +73,7 @@
 <script>
 	
 	
-	document.addEventListener('click', musicPlay);
-    function musicPlay() {
-        document.getElementById('audio').play();
-        document.removeEventListener('click', musicPlay);
-    }
+	
 	
 wx.config({
 	        debug: false,
@@ -124,6 +120,8 @@ wx.config({
 
 	
     (function () {
+	    debugger;
+	 document.getElementById('audio').play();   
 	
         var canvas = $('#canvas');
         if (!canvas[0].getContext) {
